@@ -1,231 +1,51 @@
-﻿namespace prySistemadeInformación
+namespace prySistemadeInformación
 {
     partial class FarmaciasNoya
     {
-        /// <summary>
-        /// Variable del diseñador necesaria.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
+        private System.Windows.Forms.Panel panelLateral, panelContenido, panelFiltros;
+        private System.Windows.Forms.Label lblLogo, lblTitulo, lblDescripcion, lblResultados, lblUsuario, lblAlcance;
+        private System.Windows.Forms.TextBox txtBuscar;
+        private System.Windows.Forms.ComboBox cmbTipoDroga, cmbVenta, cmbDistribucion, cmbConcentracion, cmbFormato, cmbSucursal;
+        private System.Windows.Forms.Button btnBuscar, btnLimpiar, btnAgregarProducto, btnModificarPrecio, btnModificarStock;
+        private System.Windows.Forms.DataGridView dgvProductos;
 
-        /// <summary>
-        /// Limpiar los recursos que se estén usando.
-        /// </summary>
-        /// <param name="disposing">true si los recursos administrados se deben desechar; false en caso contrario.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        protected override void Dispose(bool disposing) { if (disposing && components != null) components.Dispose(); base.Dispose(disposing); }
 
-        #region Código generado por el Diseñador de Windows Forms
-
-        /// <summary>
-        /// Método necesario para admitir el Diseñador. No se puede modificar
-        /// el contenido de este método con el editor de código.
-        /// </summary>
         private void InitializeComponent()
         {
-            this.lblTitulo = new System.Windows.Forms.Label();
-            this.cmbSucursales = new System.Windows.Forms.ComboBox();
-            this.lblSucursal = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lblDroga = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.lblNombre = new System.Windows.Forms.Label();
-            this.lblPresentación = new System.Windows.Forms.Label();
-            this.lblMiligramos = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.lblTítuloStock = new System.Windows.Forms.Label();
-            this.lblCantidad = new System.Windows.Forms.Label();
-            this.lblFechaVencimiento = new System.Windows.Forms.Label();
-            this.lblEquivalencia = new System.Windows.Forms.Label();
-            this.SuspendLayout();
-            // 
-            // lblTitulo
-            // 
-            this.lblTitulo.AutoSize = true;
-            this.lblTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitulo.Location = new System.Drawing.Point(251, 22);
-            this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(192, 24);
-            this.lblTitulo.TabIndex = 0;
-            this.lblTitulo.Text = "FARMACIAS NOYA";
-            // 
-            // cmbSucursales
-            // 
-            this.cmbSucursales.FormattingEnabled = true;
-            this.cmbSucursales.Items.AddRange(new object[] {
-            "Farmacia Noya 1 - Cosquín",
-            "Farmacia Noya 2 - Santa María de Punilla",
-            "Farmacia Noya 3 - Bialet Masse"});
-            this.cmbSucursales.Location = new System.Drawing.Point(327, 60);
-            this.cmbSucursales.Name = "cmbSucursales";
-            this.cmbSucursales.Size = new System.Drawing.Size(97, 21);
-            this.cmbSucursales.TabIndex = 1;
-            this.cmbSucursales.SelectedIndexChanged += new System.EventHandler(this.cmbSucursales_SelectedIndexChanged);
-            // 
-            // lblSucursal
-            // 
-            this.lblSucursal.AutoSize = true;
-            this.lblSucursal.Location = new System.Drawing.Point(259, 63);
-            this.lblSucursal.Name = "lblSucursal";
-            this.lblSucursal.Size = new System.Drawing.Size(51, 13);
-            this.lblSucursal.TabIndex = 2;
-            this.lblSucursal.Text = "Sucursal:";
-            this.lblSucursal.Click += new System.EventHandler(this.lblSucursal_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(39, 180);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(40, 13);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Marca:";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // lblDroga
-            // 
-            this.lblDroga.AutoSize = true;
-            this.lblDroga.Location = new System.Drawing.Point(40, 214);
-            this.lblDroga.Name = "lblDroga";
-            this.lblDroga.Size = new System.Drawing.Size(39, 13);
-            this.lblDroga.TabIndex = 4;
-            this.lblDroga.Text = "Droga:";
-            this.lblDroga.Click += new System.EventHandler(this.label2_Click);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(39, 108);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(114, 18);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Medicamento:";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
-            // 
-            // lblNombre
-            // 
-            this.lblNombre.AutoSize = true;
-            this.lblNombre.Location = new System.Drawing.Point(40, 146);
-            this.lblNombre.Name = "lblNombre";
-            this.lblNombre.Size = new System.Drawing.Size(47, 13);
-            this.lblNombre.TabIndex = 7;
-            this.lblNombre.Text = "Nombre:";
-            this.lblNombre.Click += new System.EventHandler(this.label2_Click_2);
-            // 
-            // lblPresentación
-            // 
-            this.lblPresentación.AutoSize = true;
-            this.lblPresentación.Location = new System.Drawing.Point(40, 248);
-            this.lblPresentación.Name = "lblPresentación";
-            this.lblPresentación.Size = new System.Drawing.Size(72, 13);
-            this.lblPresentación.TabIndex = 8;
-            this.lblPresentación.Text = "Presentación:";
-            this.lblPresentación.Click += new System.EventHandler(this.label2_Click_3);
-            // 
-            // lblMiligramos
-            // 
-            this.lblMiligramos.AutoSize = true;
-            this.lblMiligramos.Location = new System.Drawing.Point(216, 248);
-            this.lblMiligramos.Name = "lblMiligramos";
-            this.lblMiligramos.Size = new System.Drawing.Size(59, 13);
-            this.lblMiligramos.TabIndex = 9;
-            this.lblMiligramos.Text = "Miligramos:";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(381, 370);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(0, 13);
-            this.label4.TabIndex = 17;
-            // 
-            // lblTítuloStock
-            // 
-            this.lblTítuloStock.AutoSize = true;
-            this.lblTítuloStock.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTítuloStock.Location = new System.Drawing.Point(381, 108);
-            this.lblTítuloStock.Name = "lblTítuloStock";
-            this.lblTítuloStock.Size = new System.Drawing.Size(57, 18);
-            this.lblTítuloStock.TabIndex = 18;
-            this.lblTítuloStock.Text = "Stock:";
-            // 
-            // lblCantidad
-            // 
-            this.lblCantidad.AutoSize = true;
-            this.lblCantidad.Location = new System.Drawing.Point(381, 146);
-            this.lblCantidad.Name = "lblCantidad";
-            this.lblCantidad.Size = new System.Drawing.Size(102, 13);
-            this.lblCantidad.TabIndex = 19;
-            this.lblCantidad.Text = "Cantidad disponible:";
-            // 
-            // lblFechaVencimiento
-            // 
-            this.lblFechaVencimiento.AutoSize = true;
-            this.lblFechaVencimiento.Location = new System.Drawing.Point(381, 180);
-            this.lblFechaVencimiento.Name = "lblFechaVencimiento";
-            this.lblFechaVencimiento.Size = new System.Drawing.Size(115, 13);
-            this.lblFechaVencimiento.TabIndex = 20;
-            this.lblFechaVencimiento.Text = "Fecha de vencimiento:";
-            this.lblFechaVencimiento.Click += new System.EventHandler(this.label5_Click);
-            // 
-            // lblEquivalencia
-            // 
-            this.lblEquivalencia.AutoSize = true;
-            this.lblEquivalencia.Location = new System.Drawing.Point(381, 214);
-            this.lblEquivalencia.Name = "lblEquivalencia";
-            this.lblEquivalencia.Size = new System.Drawing.Size(125, 13);
-            this.lblEquivalencia.TabIndex = 21;
-            this.lblEquivalencia.Text = "Equivalencias/sustitutos:";
-            // 
-            // FarmaciasNoya
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(671, 450);
-            this.Controls.Add(this.lblEquivalencia);
-            this.Controls.Add(this.lblFechaVencimiento);
-            this.Controls.Add(this.lblCantidad);
-            this.Controls.Add(this.lblTítuloStock);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.lblMiligramos);
-            this.Controls.Add(this.lblPresentación);
-            this.Controls.Add(this.lblNombre);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.lblDroga);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.lblSucursal);
-            this.Controls.Add(this.cmbSucursales);
-            this.Controls.Add(this.lblTitulo);
-            this.Name = "FarmaciasNoya";
-            this.Text = "Form1";
-            this.Load += new System.EventHandler(this.FarmaciasNoya_Load);
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            panelLateral = new System.Windows.Forms.Panel(); panelContenido = new System.Windows.Forms.Panel(); panelFiltros = new System.Windows.Forms.Panel();
+            lblLogo = new System.Windows.Forms.Label(); lblTitulo = new System.Windows.Forms.Label(); lblDescripcion = new System.Windows.Forms.Label(); lblResultados = new System.Windows.Forms.Label(); lblUsuario = new System.Windows.Forms.Label(); lblAlcance = new System.Windows.Forms.Label();
+            txtBuscar = new System.Windows.Forms.TextBox(); cmbTipoDroga = new System.Windows.Forms.ComboBox(); cmbVenta = new System.Windows.Forms.ComboBox(); cmbDistribucion = new System.Windows.Forms.ComboBox(); cmbConcentracion = new System.Windows.Forms.ComboBox(); cmbFormato = new System.Windows.Forms.ComboBox(); cmbSucursal = new System.Windows.Forms.ComboBox();
+            btnBuscar = new System.Windows.Forms.Button(); btnLimpiar = new System.Windows.Forms.Button(); btnAgregarProducto = new System.Windows.Forms.Button(); btnModificarPrecio = new System.Windows.Forms.Button(); btnModificarStock = new System.Windows.Forms.Button(); dgvProductos = new System.Windows.Forms.DataGridView();
+            panelLateral.SuspendLayout(); panelContenido.SuspendLayout(); panelFiltros.SuspendLayout(); ((System.ComponentModel.ISupportInitialize)dgvProductos).BeginInit(); SuspendLayout();
+            panelLateral.BackColor = System.Drawing.Color.FromArgb(22,56,95); panelLateral.Dock = System.Windows.Forms.DockStyle.Left; panelLateral.Width = 235; panelLateral.Controls.Add(lblLogo);
+            lblLogo.Text = "FARMACIAS NOYA"; lblLogo.ForeColor = System.Drawing.Color.White; lblLogo.Font = new System.Drawing.Font("Segoe UI", 16, System.Drawing.FontStyle.Bold); lblLogo.Location = new System.Drawing.Point(22,28); lblLogo.AutoSize = true;
+            string[] menu = { "⌂   Inicio", "▣   Consultar productos", "▤   Productos", "▥   Ventas", "♙   Clientes", "▦   Reportes", "⚙   Configuración", "⇥   Cerrar sesión" };
+            for (int i=0; i<menu.Length; i++) { var b = new System.Windows.Forms.Button(); b.Text=menu[i]; b.FlatStyle=System.Windows.Forms.FlatStyle.Flat; b.FlatAppearance.BorderSize=0; b.ForeColor=System.Drawing.Color.White; b.BackColor=i==1 ? System.Drawing.Color.FromArgb(35,91,145) : panelLateral.BackColor; b.Font=new System.Drawing.Font("Segoe UI",10); b.TextAlign=System.Drawing.ContentAlignment.MiddleLeft; b.Location=new System.Drawing.Point(12,115+i*48); b.Size=new System.Drawing.Size(211,42); panelLateral.Controls.Add(b); }
+            panelContenido.BackColor = System.Drawing.Color.FromArgb(246,248,251); panelContenido.Dock=System.Windows.Forms.DockStyle.Fill; panelContenido.Padding=new System.Windows.Forms.Padding(28,22,28,22);
+            panelContenido.Controls.Add(dgvProductos); panelContenido.Controls.Add(lblResultados); panelContenido.Controls.Add(btnModificarStock); panelContenido.Controls.Add(btnModificarPrecio); panelContenido.Controls.Add(btnAgregarProducto); panelContenido.Controls.Add(panelFiltros); panelContenido.Controls.Add(lblDescripcion); panelContenido.Controls.Add(lblTitulo); panelContenido.Controls.Add(lblUsuario); panelContenido.Controls.Add(lblAlcance);
+            lblTitulo.Text="Consultar productos"; lblTitulo.Font=new System.Drawing.Font("Segoe UI",21,System.Drawing.FontStyle.Bold); lblTitulo.ForeColor=System.Drawing.Color.FromArgb(22,56,95); lblTitulo.Location=new System.Drawing.Point(28,32); lblTitulo.AutoSize=true;
+            lblDescripcion.Text="Buscá medicamentos y consultá su disponibilidad en todas las sucursales."; lblDescripcion.ForeColor=System.Drawing.Color.FromArgb(95,105,117); lblDescripcion.Font=new System.Drawing.Font("Segoe UI",10); lblDescripcion.Location=new System.Drawing.Point(31,72); lblDescripcion.AutoSize=true;
+            lblUsuario.Text="Usuario autenticado"; lblUsuario.ForeColor=System.Drawing.Color.FromArgb(70,78,89); lblUsuario.Font=new System.Drawing.Font("Segoe UI",9); lblUsuario.Location=new System.Drawing.Point(650,34); lblUsuario.AutoSize=true;
+            lblAlcance.Text="●  Consultando las 3 sucursales"; lblAlcance.ForeColor=System.Drawing.Color.FromArgb(35,140,101); lblAlcance.Font=new System.Drawing.Font("Segoe UI",9); lblAlcance.Location=new System.Drawing.Point(650,57); lblAlcance.AutoSize=true;
+            panelFiltros.BackColor=System.Drawing.Color.White; panelFiltros.Location=new System.Drawing.Point(28,108); panelFiltros.Size=new System.Drawing.Size(1000,115); panelFiltros.Anchor=System.Windows.Forms.AnchorStyles.Top|System.Windows.Forms.AnchorStyles.Left|System.Windows.Forms.AnchorStyles.Right;
+            AgregarEtiquetaFiltro("Buscar por nombre o código",18,8); AgregarEtiquetaFiltro("Tipo de droga",205,8); AgregarEtiquetaFiltro("Condición de venta",392,8); AgregarEtiquetaFiltro("Distribución",579,8); AgregarEtiquetaFiltro("Concentración",18,60); AgregarEtiquetaFiltro("Formato",205,60); AgregarEtiquetaFiltro("Disponibilidad",392,60);
+            AgregarCampo(txtBuscar,"Nombre o código...",18,28,170); AgregarCombo(cmbTipoDroga,new[]{"Todos","Analgésico","Antibiótico","Antihistamínico","Antihipertensivo","Broncodilatador","Gastrointestinal","Antidiabético"},205,28); AgregarCombo(cmbVenta,new[]{"Todos","Venta libre","Con receta"},392,28); AgregarCombo(cmbDistribucion,new[]{"Todas","Caja","Blíster","Frasco"},579,28); AgregarCombo(cmbConcentracion,new[]{"Todas","10 mg","20 mg","40 mg","100 mg","500 mg","100 UI/ml"},18,80); AgregarCombo(cmbFormato,new[]{"Todos","Comprimido","Cápsula","Jarabe","Inhalador","Lapicera"},205,80); AgregarCombo(cmbSucursal,new[]{"Todas las sucursales","Noya 1 - Cosquín","Noya 2 - Santa María de Punilla","Noya 3 - Bialet Massé"},392,80);
+            btnBuscar.Text="Buscar"; btnBuscar.Location=new System.Drawing.Point(596,78); btnBuscar.Size=new System.Drawing.Size(105,30); btnBuscar.BackColor=System.Drawing.Color.FromArgb(35,105,170); btnBuscar.ForeColor=System.Drawing.Color.White; btnBuscar.FlatStyle=System.Windows.Forms.FlatStyle.Flat; btnBuscar.Click+=new System.EventHandler(btnBuscar_Click); panelFiltros.Controls.Add(btnBuscar);
+            btnLimpiar.Text="Limpiar filtros"; btnLimpiar.Location=new System.Drawing.Point(710,78); btnLimpiar.Size=new System.Drawing.Size(115,30); btnLimpiar.FlatStyle=System.Windows.Forms.FlatStyle.Flat; btnLimpiar.Click+=new System.EventHandler(btnLimpiar_Click); panelFiltros.Controls.Add(btnLimpiar);
+            lblResultados.Text="Resultados"; lblResultados.Location=new System.Drawing.Point(28,240); lblResultados.AutoSize=true; lblResultados.Font=new System.Drawing.Font("Segoe UI",10,System.Drawing.FontStyle.Bold); lblResultados.ForeColor=System.Drawing.Color.FromArgb(22,56,95);
+            btnAgregarProducto.Text="+  Agregar producto"; btnAgregarProducto.Size=new System.Drawing.Size(150,34); btnAgregarProducto.Anchor=System.Windows.Forms.AnchorStyles.Top|System.Windows.Forms.AnchorStyles.Right; btnAgregarProducto.Location=new System.Drawing.Point(800,235); btnAgregarProducto.BackColor=System.Drawing.Color.FromArgb(35,145,105); btnAgregarProducto.ForeColor=System.Drawing.Color.White; btnAgregarProducto.FlatStyle=System.Windows.Forms.FlatStyle.Flat; btnAgregarProducto.Click+=new System.EventHandler(btnAgregarProducto_Click);
+            btnModificarPrecio.Text="Modificar precio"; btnModificarPrecio.Size=new System.Drawing.Size(130,34); btnModificarPrecio.Anchor=System.Windows.Forms.AnchorStyles.Top|System.Windows.Forms.AnchorStyles.Right; btnModificarPrecio.Location=new System.Drawing.Point(950,235); btnModificarPrecio.FlatStyle=System.Windows.Forms.FlatStyle.Flat; btnModificarPrecio.Click+=new System.EventHandler(btnModificarPrecio_Click);
+            btnModificarStock.Text="Modificar stock"; btnModificarStock.Size=new System.Drawing.Size(130,34); btnModificarStock.Anchor=System.Windows.Forms.AnchorStyles.Top|System.Windows.Forms.AnchorStyles.Right; btnModificarStock.Location=new System.Drawing.Point(1090,235); btnModificarStock.BackColor=System.Drawing.Color.FromArgb(238,245,251); btnModificarStock.ForeColor=System.Drawing.Color.FromArgb(35,105,170); btnModificarStock.FlatStyle=System.Windows.Forms.FlatStyle.Flat; btnModificarStock.Click+=new System.EventHandler(btnModificarStock_Click);
+            dgvProductos.Location=new System.Drawing.Point(28,280); dgvProductos.Size=new System.Drawing.Size(1000,380); dgvProductos.Anchor=System.Windows.Forms.AnchorStyles.Top|System.Windows.Forms.AnchorStyles.Bottom|System.Windows.Forms.AnchorStyles.Left|System.Windows.Forms.AnchorStyles.Right; dgvProductos.BackgroundColor=System.Drawing.Color.White; dgvProductos.BorderStyle=System.Windows.Forms.BorderStyle.None; dgvProductos.RowHeadersVisible=false; dgvProductos.AllowUserToAddRows=false; dgvProductos.AllowUserToDeleteRows=false; dgvProductos.ReadOnly=true; dgvProductos.EditMode=System.Windows.Forms.DataGridViewEditMode.EditProgrammatically; dgvProductos.SelectionMode=System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect; dgvProductos.AutoGenerateColumns=false; dgvProductos.EnableHeadersVisualStyles=false; dgvProductos.ColumnHeadersDefaultCellStyle.BackColor=System.Drawing.Color.FromArgb(22,56,95); dgvProductos.ColumnHeadersDefaultCellStyle.ForeColor=System.Drawing.Color.White; dgvProductos.AutoSizeColumnsMode=System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill; dgvProductos.CellContentClick+=new System.Windows.Forms.DataGridViewCellEventHandler(dgvProductos_CellContentClick);
+            AgregarColumna("Producto","Nombre"); AgregarColumna("Tipo de droga","TipoDroga"); AgregarColumna("Venta","Venta"); AgregarColumna("Distribución","Distribucion"); AgregarColumna("Concentración","Concentracion"); AgregarColumna("Formato","Formato"); AgregarColumna("Precio de venta","Precio"); AgregarColumna("Stock Noya 1","StockNoya1"); AgregarColumna("Stock Noya 2","StockNoya2"); AgregarColumna("Stock Noya 3","StockNoya3"); dgvProductos.Columns.Add(new System.Windows.Forms.DataGridViewButtonColumn { Name="Acciones", HeaderText="Acciones", Text="Editar", UseColumnTextForButtonValue=true });
+            ClientSize=new System.Drawing.Size(1280,720); MinimumSize=new System.Drawing.Size(1050,650); StartPosition=System.Windows.Forms.FormStartPosition.CenterScreen; WindowState=System.Windows.Forms.FormWindowState.Maximized; Text="Farmacia Noya - Consulta de productos"; Load+=new System.EventHandler(FarmaciasNoya_Load); Controls.Add(panelContenido); Controls.Add(panelLateral);
+            panelFiltros.ResumeLayout(false); panelContenido.ResumeLayout(false); panelLateral.ResumeLayout(false); ((System.ComponentModel.ISupportInitialize)dgvProductos).EndInit(); ResumeLayout(false);
         }
-
-        #endregion
-
-        private System.Windows.Forms.Label lblTitulo;
-        private System.Windows.Forms.ComboBox cmbSucursales;
-        private System.Windows.Forms.Label lblSucursal;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label lblDroga;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label lblNombre;
-        private System.Windows.Forms.Label lblPresentación;
-        private System.Windows.Forms.Label lblMiligramos;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label lblTítuloStock;
-        private System.Windows.Forms.Label lblCantidad;
-        private System.Windows.Forms.Label lblFechaVencimiento;
-        private System.Windows.Forms.Label lblEquivalencia;
+        private void AgregarEtiquetaFiltro(string texto,int x,int y) { var etiqueta=new System.Windows.Forms.Label(); etiqueta.Text=texto; etiqueta.AutoSize=true; etiqueta.Font=new System.Drawing.Font("Segoe UI",8,System.Drawing.FontStyle.Bold); etiqueta.ForeColor=System.Drawing.Color.FromArgb(70,78,89); etiqueta.Location=new System.Drawing.Point(x,y); panelFiltros.Controls.Add(etiqueta); }
+        private void AgregarCampo(System.Windows.Forms.TextBox c,string texto,int x,int y,int ancho) { c.Text=texto; c.ForeColor=System.Drawing.Color.Gray; c.Location=new System.Drawing.Point(x,y); c.Size=new System.Drawing.Size(ancho,25); panelFiltros.Controls.Add(c); }
+        private void AgregarCombo(System.Windows.Forms.ComboBox c,string[] items,int x,int y) { c.DropDownStyle=System.Windows.Forms.ComboBoxStyle.DropDownList; c.Items.AddRange(items); c.SelectedIndex=0; c.Location=new System.Drawing.Point(x,y); c.Size=new System.Drawing.Size(170,25); panelFiltros.Controls.Add(c); }
+        private void AgregarColumna(string encabezado,string propiedad) { dgvProductos.Columns.Add(new System.Windows.Forms.DataGridViewTextBoxColumn { HeaderText=encabezado, DataPropertyName=propiedad }); }
     }
 }
-

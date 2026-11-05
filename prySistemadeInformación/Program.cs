@@ -16,7 +16,19 @@ namespace prySistemadeInformación
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FarmaciasNoya());
+
+            string usuarioAutenticado;
+            using (var login = new FormularioLogin())
+            {
+                if (login.ShowDialog() != DialogResult.OK)
+                {
+                    return;
+                }
+
+                usuarioAutenticado = login.UsuarioAutenticado;
+            }
+
+            Application.Run(new FarmaciasNoya(usuarioAutenticado));
         }
     }
 }
