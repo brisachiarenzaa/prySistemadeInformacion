@@ -12,16 +12,34 @@ namespace prySistemadeInformación
     {
         private readonly List<Medicamento> medicamentos = new List<Medicamento>();
         private readonly string usuarioAutenticado;
-        private readonly string archivoMedicamentos = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "medicamentos.txt");
-        private readonly string archivoHistorial = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "historial.txt");
+        private readonly string carpetaDatos = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "FARMACIA NOYA");
+        private readonly string archivoMedicamentos;
+        private readonly string archivoHistorial;
+        public bool SolicitarNuevoInicioSesion { get; private set; }
 
         public FarmaciasNoya(string usuarioAutenticado)
         {
             InitializeComponent();
             this.usuarioAutenticado = usuarioAutenticado;
+            Directory.CreateDirectory(carpetaDatos);
+            archivoMedicamentos = Path.Combine(carpetaDatos, "medicamentos.txt");
+            archivoHistorial = Path.Combine(carpetaDatos, "historial.txt");
+            MigrarDatosExistentes();
             lblUsuario.Text = usuarioAutenticado + "  •  Empleado autorizado";
             cmbSucursal.SelectedIndexChanged += cmbSucursal_SelectedIndexChanged;
             CargarDatos();
+        }
+
+        private void MigrarDatosExistentes()
+        {
+            string carpetaAnterior = AppDomain.CurrentDomain.BaseDirectory;
+            MigrarArchivo(Path.Combine(carpetaAnterior, "medicamentos.txt"), archivoMedicamentos);
+            MigrarArchivo(Path.Combine(carpetaAnterior, "historial.txt"), archivoHistorial);
+        }
+
+        private void MigrarArchivo(string origen, string destino)
+        {
+            if (File.Exists(origen) && !File.Exists(destino)) File.Copy(origen, destino);
         }
 
         private void FarmaciasNoya_Load(object sender, EventArgs e)
@@ -32,20 +50,36 @@ namespace prySistemadeInformación
 
         private void CargarMedicamentosDePrueba()
         {
-            medicamentos.Add(new Medicamento("PAR-500", "Paracetamol", "Analgésico", "Venta libre", "Caja", "500 mg", "Comprimido", 1850.50m, 32, 18, 25));
-            medicamentos.Add(new Medicamento("IBU-400", "Ibuprofeno", "Analgésico", "Venta libre", "Caja", "400 mg", "Comprimido", 2340.00m, 15, 22, 8));
-            medicamentos.Add(new Medicamento("AMO-500", "Amoxicilina", "Antibiótico", "Con receta", "Caja", "500 mg", "Cápsula", 4890.75m, 10, 0, 6));
-            medicamentos.Add(new Medicamento("LOS-050", "Losartán", "Antihipertensivo", "Con receta", "Blíster", "50 mg", "Comprimido", 3150.00m, 20, 12, 17));
-            medicamentos.Add(new Medicamento("CET-010", "Cetirizina", "Antihistamínico", "Venta libre", "Caja", "10 mg", "Comprimido", 1980.25m, 7, 14, 11));
-            medicamentos.Add(new Medicamento("SAL-100", "Salbutamol", "Broncodilatador", "Con receta", "Frasco", "100 mg", "Inhalador", 7250.00m, 4, 9, 0));
-            medicamentos.Add(new Medicamento("OME-020", "Omeprazol", "Gastrointestinal", "Venta libre", "Caja", "20 mg", "Cápsula", 2690.00m, 25, 16, 20));
-            medicamentos.Add(new Medicamento("MET-500", "Metformina", "Antidiabético", "Con receta", "Caja", "500 mg", "Comprimido", 3440.60m, 18, 5, 13));
-            medicamentos.Add(new Medicamento("INS-100", "Insulina Glargina", "Antidiabético", "Con receta", "Caja", "100 UI/ml", "Lapicera", 12850.00m, 6, 4, 8));
+            AgregarSiNoExiste(new Medicamento("PAR-500", "Paracetamol", "Analgésico", "Venta libre", "Caja", "500 mg", "Comprimido", 1850.50m, 32, 18, 25));
+            AgregarSiNoExiste(new Medicamento("TAF-500", "Tafirol", "Analgésico", "Venta libre", "Caja", "500 mg", "Comprimido", 2100.00m, 20, 15, 18));
+            AgregarSiNoExiste(new Medicamento("TYL-500", "Tylenol", "Analgésico", "Venta libre", "Caja", "500 mg", "Comprimido", 2250.00m, 12, 10, 14));
+            AgregarSiNoExiste(new Medicamento("IBU-400", "Ibuprofeno", "Analgésico", "Venta libre", "Caja", "400 mg", "Comprimido", 2340.00m, 15, 22, 8));
+            AgregarSiNoExiste(new Medicamento("ACT-400", "Actron", "Analgésico", "Venta libre", "Caja", "400 mg", "Cápsula", 2500.00m, 18, 12, 9));
+            AgregarSiNoExiste(new Medicamento("IBP-600", "Ibupirac", "Analgésico", "Venta libre", "Caja", "600 mg", "Comprimido", 2890.00m, 9, 8, 11));
+            AgregarSiNoExiste(new Medicamento("DIC-050", "Diclofenac", "Analgésico", "Venta libre", "Caja", "50 mg", "Comprimido", 2200.00m, 14, 10, 16));
+            AgregarSiNoExiste(new Medicamento("AMO-500", "Amoxicilina", "Antibiótico", "Con receta", "Caja", "500 mg", "Cápsula", 4890.75m, 10, 0, 6));
+            AgregarSiNoExiste(new Medicamento("LOS-050", "Losartán", "Antihipertensivo", "Con receta", "Blíster", "50 mg", "Comprimido", 3150.00m, 20, 12, 17));
+            AgregarSiNoExiste(new Medicamento("CET-010", "Cetirizina", "Antihistamínico", "Venta libre", "Caja", "10 mg", "Comprimido", 1980.25m, 7, 14, 11));
+            AgregarSiNoExiste(new Medicamento("SAL-100", "Salbutamol", "Broncodilatador", "Con receta", "Frasco", "100 mg", "Inhalador", 7250.00m, 4, 9, 0));
+            AgregarSiNoExiste(new Medicamento("OME-020", "Omeprazol", "Gastrointestinal", "Venta libre", "Caja", "20 mg", "Cápsula", 2690.00m, 25, 16, 20));
+            AgregarSiNoExiste(new Medicamento("MET-500", "Metformina", "Antidiabético", "Con receta", "Caja", "500 mg", "Comprimido", 3440.60m, 18, 5, 13));
+            AgregarSiNoExiste(new Medicamento("INS-100", "Insulina Glargina", "Antidiabético", "Con receta", "Caja", "100 UI/ml", "Lapicera", 12850.00m, 6, 4, 8));
+        }
+
+        private void AgregarSiNoExiste(Medicamento medicamento)
+        {
+            if (!medicamentos.Any(m => m.Codigo.Equals(medicamento.Codigo, StringComparison.OrdinalIgnoreCase))) medicamentos.Add(medicamento);
         }
 
         private void CargarDatos()
         {
-            if (File.Exists(archivoMedicamentos) && CargarMedicamentosDesdeArchivo()) return;
+            if (File.Exists(archivoMedicamentos) && CargarMedicamentosDesdeArchivo())
+            {
+                int cantidadAnterior = medicamentos.Count;
+                CargarMedicamentosDePrueba();
+                if (medicamentos.Count != cantidadAnterior) GuardarMedicamentosEnArchivo();
+                return;
+            }
 
             CargarMedicamentosDePrueba();
             GuardarMedicamentosEnArchivo();
@@ -61,10 +95,12 @@ namespace prySistemadeInformación
                     string[] datos = linea.Split('|');
                     decimal precio;
                     int stock1, stock2, stock3;
-                    if (datos.Length != 11 || !decimal.TryParse(datos[7], NumberStyles.Number, CultureInfo.InvariantCulture, out precio) ||
+                    if ((datos.Length != 11 && datos.Length != 12) || !decimal.TryParse(datos[7], NumberStyles.Number, CultureInfo.InvariantCulture, out precio) ||
                         !int.TryParse(datos[8], out stock1) || !int.TryParse(datos[9], out stock2) || !int.TryParse(datos[10], out stock3)) return false;
 
-                    medicamentos.Add(new Medicamento(datos[0], datos[1], datos[2], datos[3], datos[4], datos[5], datos[6], precio, stock1, stock2, stock3));
+                    Medicamento medicamento = new Medicamento(datos[0], datos[1], datos[2], datos[3], datos[4], datos[5], datos[6], precio, stock1, stock2, stock3);
+                    if (datos.Length == 12) medicamento.Grupo = datos[11];
+                    medicamentos.Add(medicamento);
                 }
                 return medicamentos.Count > 0;
             }
@@ -77,8 +113,8 @@ namespace prySistemadeInformación
 
         private void GuardarMedicamentosEnArchivo()
         {
-            var lineas = new List<string> { "# Codigo|Nombre|TipoDroga|Venta|Distribucion|Concentracion|Formato|Precio|StockNoya1|StockNoya2|StockNoya3" };
-            lineas.AddRange(medicamentos.Select(m => string.Join("|", m.Codigo, m.Nombre, m.TipoDroga, m.Venta, m.Distribucion, m.Concentracion, m.Formato, m.Precio.ToString(CultureInfo.InvariantCulture), m.StockNoya1, m.StockNoya2, m.StockNoya3)));
+            var lineas = new List<string> { "# Codigo|Nombre|TipoDroga|Venta|Distribucion|Concentracion|Formato|Precio|StockNoya1|StockNoya2|StockNoya3|Grupo" };
+            lineas.AddRange(medicamentos.Select(m => string.Join("|", m.Codigo, m.Nombre, m.TipoDroga, m.Venta, m.Distribucion, m.Concentracion, m.Formato, m.Precio.ToString(CultureInfo.InvariantCulture), m.StockNoya1, m.StockNoya2, m.StockNoya3, m.Grupo)));
             File.WriteAllLines(archivoMedicamentos, lineas);
         }
 
@@ -102,9 +138,9 @@ namespace prySistemadeInformación
         private void AplicarFiltros()
         {
             ActualizarSucursalConsultada();
-            string texto = txtBuscar.Text == "Nombre o código..." ? "" : txtBuscar.Text.Trim().ToLower();
+            string texto = txtBuscar.Text == "Nombre, código o grupo..." ? "" : txtBuscar.Text.Trim().ToLower();
             IEnumerable<Medicamento> resultado = medicamentos.Where(m =>
-                string.IsNullOrEmpty(texto) || m.Nombre.ToLower().Contains(texto) || m.Codigo.ToLower().Contains(texto));
+                string.IsNullOrEmpty(texto) || m.Nombre.ToLower().Contains(texto) || m.Codigo.ToLower().Contains(texto) || m.Grupo.ToLower().Contains(texto));
 
             if (cmbTipoDroga.SelectedIndex > 0) resultado = resultado.Where(m => m.TipoDroga == cmbTipoDroga.Text);
             if (cmbVenta.SelectedIndex > 0) resultado = resultado.Where(m => m.Venta == cmbVenta.Text);
@@ -118,7 +154,7 @@ namespace prySistemadeInformación
                 if (cmbSucursal.Text == "Noya 3 - Bialet Massé") resultado = resultado.Where(m => m.StockNoya3 > 0);
             }
 
-            List<Medicamento> lista = resultado.ToList();
+            List<Medicamento> lista = resultado.OrderBy(m => m.Grupo).ThenBy(m => m.Nombre).ToList();
             dgvProductos.DataSource = null;
             dgvProductos.DataSource = lista;
             lblResultados.Text = "Resultados: " + lista.Count + " producto" + (lista.Count == 1 ? "" : "s");
@@ -144,7 +180,7 @@ namespace prySistemadeInformación
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            txtBuscar.Text = "Nombre o código..."; txtBuscar.ForeColor = Color.Gray;
+            txtBuscar.Text = "Nombre, código o grupo..."; txtBuscar.ForeColor = Color.Gray;
             cmbTipoDroga.SelectedIndex = 0; cmbVenta.SelectedIndex = 0; cmbDistribucion.SelectedIndex = 0; cmbConcentracion.SelectedIndex = 0; cmbFormato.SelectedIndex = 0; cmbSucursal.SelectedIndex = 0;
             AplicarFiltros();
         }
@@ -266,6 +302,15 @@ namespace prySistemadeInformación
                 return dialogo.ShowDialog(this) == DialogResult.OK;
             }
         }
+
+        private void btnCerrarSesion_Click(object sender, EventArgs e)
+        {
+            DialogResult respuesta = MessageBox.Show("¿Querés cerrar la sesión actual?", "Cerrar sesión", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (respuesta != DialogResult.Yes) return;
+
+            SolicitarNuevoInicioSesion = true;
+            Close();
+        }
     }
 
     internal class DialogoPrecio : Form
@@ -304,7 +349,15 @@ namespace prySistemadeInformación
     public class Medicamento
     {
         public Medicamento(string codigo, string nombre, string tipoDroga, string venta, string distribucion, string concentracion, string formato, decimal precio, int stockNoya1, int stockNoya2, int stockNoya3)
-        { Codigo = codigo; Nombre = nombre; TipoDroga = tipoDroga; Venta = venta; Distribucion = distribucion; Concentracion = concentracion; Formato = formato; Precio = precio; StockNoya1 = stockNoya1; StockNoya2 = stockNoya2; StockNoya3 = stockNoya3; }
-        public string Codigo { get; set; } public string Nombre { get; set; } public string TipoDroga { get; set; } public string Venta { get; set; } public string Distribucion { get; set; } public string Concentracion { get; set; } public string Formato { get; set; } public decimal Precio { get; set; } public int StockNoya1 { get; set; } public int StockNoya2 { get; set; } public int StockNoya3 { get; set; }
+        { Codigo = codigo; Nombre = nombre; TipoDroga = tipoDroga; Grupo = ObtenerGrupo(nombre, tipoDroga); Venta = venta; Distribucion = distribucion; Concentracion = concentracion; Formato = formato; Precio = precio; StockNoya1 = stockNoya1; StockNoya2 = stockNoya2; StockNoya3 = stockNoya3; }
+        public string Codigo { get; set; } public string Nombre { get; set; } public string TipoDroga { get; set; } public string Grupo { get; set; } public string Venta { get; set; } public string Distribucion { get; set; } public string Concentracion { get; set; } public string Formato { get; set; } public decimal Precio { get; set; } public int StockNoya1 { get; set; } public int StockNoya2 { get; set; } public int StockNoya3 { get; set; }
+
+        private static string ObtenerGrupo(string nombre, string tipoDroga)
+        {
+            string nombreNormalizado = nombre.ToLowerInvariant();
+            if (nombreNormalizado.Contains("paracetamol") || nombreNormalizado.Contains("tafirol") || nombreNormalizado.Contains("tylenol")) return "Paracetamol";
+            if (nombreNormalizado.Contains("ibuprofeno") || nombreNormalizado.Contains("actron") || nombreNormalizado.Contains("ibupirac")) return "Ibuprofeno";
+            return tipoDroga;
+        }
     }
 }

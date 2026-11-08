@@ -17,18 +17,22 @@ namespace prySistemadeInformación
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            string usuarioAutenticado;
-            using (var login = new FormularioLogin())
+            while (true)
             {
-                if (login.ShowDialog() != DialogResult.OK)
+                string usuarioAutenticado;
+                using (var login = new FormularioLogin())
                 {
-                    return;
+                    if (login.ShowDialog() != DialogResult.OK) return;
+                    usuarioAutenticado = login.UsuarioAutenticado;
                 }
 
-                usuarioAutenticado = login.UsuarioAutenticado;
+                using (var farmacia = new FarmaciasNoya(usuarioAutenticado))
+                {
+                    Application.Run(farmacia);
+                    if (!farmacia.SolicitarNuevoInicioSesion) return;
+                }
             }
 
-            Application.Run(new FarmaciasNoya(usuarioAutenticado));
         }
     }
 }
