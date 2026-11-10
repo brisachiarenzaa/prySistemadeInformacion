@@ -13,17 +13,22 @@ namespace prySistemadeInformación
         private readonly List<Medicamento> medicamentos = new List<Medicamento>();
         private readonly string usuarioAutenticado;
         private readonly string carpetaDatos = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "FARMACIA NOYA");
-        private readonly string archivoMedicamentos;
-        private readonly string archivoHistorial;
+        // Se inicializan al declarar el campo para que el constructor sin parámetros
+        // también deje la instancia en un estado válido para el diseñador de WinForms.
+        private readonly string archivoMedicamentos = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "FARMACIA NOYA", "medicamentos.txt");
+        private readonly string archivoHistorial = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "FARMACIA NOYA", "historial.txt");
         public bool SolicitarNuevoInicioSesion { get; private set; }
+
+        public FarmaciasNoya()
+        {
+            InitializeComponent();
+        }
 
         public FarmaciasNoya(string usuarioAutenticado)
         {
             InitializeComponent();
             this.usuarioAutenticado = usuarioAutenticado;
             Directory.CreateDirectory(carpetaDatos);
-            archivoMedicamentos = Path.Combine(carpetaDatos, "medicamentos.txt");
-            archivoHistorial = Path.Combine(carpetaDatos, "historial.txt");
             MigrarDatosExistentes();
             lblUsuario.Text = usuarioAutenticado + "  •  Empleado autorizado";
             cmbSucursal.SelectedIndexChanged += cmbSucursal_SelectedIndexChanged;
