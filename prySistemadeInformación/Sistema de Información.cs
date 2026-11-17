@@ -218,7 +218,7 @@ namespace prySistemadeInformación
                 if (dialogo.ShowDialog(this) == DialogResult.OK)
                 {
                     GuardarMedicamentosEnArchivo();
-                    RegistrarHistorial("Stock modificado: " + medicamento.Nombre + " | Noya 1: " + stock1Anterior + " -> " + medicamento.StockNoya1 + " | Noya 2: " + stock2Anterior + " -> " + medicamento.StockNoya2 + " | Noya 3: " + stock3Anterior + " -> " + medicamento.StockNoya3);
+                    RegistrarHistorial("Stock modificado: " + medicamento.Nombre + " | Motivo: " + dialogo.Motivo + " | Noya 1: " + stock1Anterior + " -> " + medicamento.StockNoya1 + " | Noya 2: " + stock2Anterior + " -> " + medicamento.StockNoya2 + " | Noya 3: " + stock3Anterior + " -> " + medicamento.StockNoya3);
                     AplicarFiltros();
                 }
             }
@@ -248,11 +248,14 @@ namespace prySistemadeInformación
         private readonly NumericUpDown numStock1;
         private readonly NumericUpDown numStock2;
         private readonly NumericUpDown numStock3;
+        private readonly ComboBox cmbMotivo;
+
+        public string Motivo { get { return cmbMotivo.Text; } }
 
         public DialogoStock(Medicamento medicamento)
         {
             Text = "Modificar stock";
-            Size = new Size(430, 270);
+            Size = new Size(430, 335);
             StartPosition = FormStartPosition.CenterParent;
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
@@ -260,12 +263,23 @@ namespace prySistemadeInformación
             BackColor = Color.White;
 
             var titulo = new Label { Text = "Stock de " + medicamento.Nombre, AutoSize = true, Location = new Point(24, 20), Font = new Font("Segoe UI", 13, FontStyle.Bold), ForeColor = Color.FromArgb(22, 56, 95) };
-            numStock1 = CrearControlStock("Noya 1 - Cosquín", medicamento.StockNoya1, 24, 70);
-            numStock2 = CrearControlStock("Noya 2 - Santa María", medicamento.StockNoya2, 145, 70);
-            numStock3 = CrearControlStock("Noya 3 - Bialet Massé", medicamento.StockNoya3, 266, 70);
-            var guardar = new Button { Text = "Guardar stock", Location = new Point(270, 165), Size = new Size(120, 34), BackColor = Color.FromArgb(35, 105, 170), ForeColor = Color.White, FlatStyle = FlatStyle.Flat };
+            var etiquetaMotivo = new Label { Text = "¿Qué pasó con este stock?", AutoSize = true, Location = new Point(24, 62), Font = new Font("Segoe UI", 9, FontStyle.Bold), ForeColor = Color.FromArgb(70, 78, 89) };
+            cmbMotivo = new ComboBox { Location = new Point(24, 84), Width = 366, DropDownStyle = ComboBoxStyle.DropDownList };
+            cmbMotivo.Items.AddRange(new object[] { "Venta", "Extravío", "Dañado", "Enviado a otra sucursal", "Vencimiento" });
+            cmbMotivo.SelectedIndex = -1;
+            numStock1 = CrearControlStock("Noya 1 - Cosquín", medicamento.StockNoya1, 24, 130);
+            numStock2 = CrearControlStock("Noya 2 - Santa María", medicamento.StockNoya2, 145, 130);
+            numStock3 = CrearControlStock("Noya 3 - Bialet Massé", medicamento.StockNoya3, 266, 130);
+            var guardar = new Button { Text = "Guardar stock", Location = new Point(270, 225), Size = new Size(120, 34), BackColor = Color.FromArgb(35, 105, 170), ForeColor = Color.White, FlatStyle = FlatStyle.Flat };
             guardar.Click += delegate
             {
+                if (cmbMotivo.SelectedIndex < 0)
+                {
+                    MessageBox.Show("Seleccioná qué pasó con el stock.", "Modificar stock", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    cmbMotivo.Focus();
+                    return;
+                }
+
                 medicamento.StockNoya1 = (int)numStock1.Value;
                 medicamento.StockNoya2 = (int)numStock2.Value;
                 medicamento.StockNoya3 = (int)numStock3.Value;
@@ -273,7 +287,7 @@ namespace prySistemadeInformación
                 Close();
             };
             AcceptButton = guardar;
-            Controls.AddRange(new Control[] { titulo, numStock1, numStock2, numStock3, guardar });
+            Controls.AddRange(new Control[] { titulo, etiquetaMotivo, cmbMotivo, numStock1, numStock2, numStock3, guardar });
         }
 
         private NumericUpDown CrearControlStock(string texto, int valor, int x, int y)
